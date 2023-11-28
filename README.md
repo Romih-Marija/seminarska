@@ -9,8 +9,11 @@ Za uporabo aplikacije se mora Oseba registrirati oz. prijaviti.
 
 Funkcija aplikacije je razdeljena na dva glavna dela.
 
-Prvi del omogoča iskanje in povezovanje asistentov in uporabnikov.Prijavljen uporabnik aplikacije lahko objavi v svojem imenu ali pa v imenu koga drugega (družinskega člana, zaposlenega…) eno ali več objav. Objava lahko prikazuje Osebnega asistenta, ki išče zaposlitev ali Uporabnika asistence, ki išče osebnega asistenta.
+Prvi del omogoča iskanje in povezovanje asistentov in uporabnikov.
+Prijavljen uporabnik aplikacije lahko objavi v svojem imenu ali pa v imenu koga drugega (družinskega člana, zaposlenega…) eno ali več objav. Objava lahko prikazuje Osebnega asistenta, ki išče zaposlitev ali Uporabnika asistence, ki išče osebnega asistenta.
+
 Drugi del omogoča pregled nad nadomeščanji, iskanje nadomestnih asistentov in iskanje uporabnikov, ki nadomeščanje potrebujejo. Prikazan bo koledar, ki bo shematsko prikazoval katere dneve v mesecu kdo Nudi nadomeščanje in katere dneve kdo Išče nadomeščanje.
+
 Uporabniki aplikacije bodo med seboj lahko kontaktirali preko Chata, ki bo vgrajen v aplikacijo ali preko drugih osebnih kontaktov, ki jih bodo lahko po želji javno objavili v profilu.
 
 Entitete: Oseba, Osebni asistent, Uporabnik asistence, Objava – iščem asistenta, Objava – nudim asistenco…
