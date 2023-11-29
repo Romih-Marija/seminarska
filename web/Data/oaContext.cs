@@ -10,11 +10,15 @@ public class oaContext : IdentityDbContext<ApplicationUser>
     {
     }
     public DbSet<UporabniskiRacun> UporabniskiRacuni { get; set; }
+    public DbSet<UporabniskiRacun> ObjaveIscemOa { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<UporabniskiRacun>().ToTable("UporabniskiRacun");
+        modelBuilder.Entity<ObjavaIscemOa>().ToTable("ObjavaIscemOa");
     }
+
+    public DbSet<web.Models.ObjavaIscemOa> ObjavaIscemOa { get; set; } = default!;
 }
 }

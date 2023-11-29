@@ -23,8 +23,21 @@ namespace web.Data
                 new UporabniskiRacun{uporabniskoIme="Meredith Alonso",eposta="meredith@gmail.com",geslo="g2",EnrollmentDate=DateTime.Parse("2017-09-01")},
             };
 
+            
+
             context.UporabniskiRacuni.AddRange(uporabniskiRacuni);
             context.SaveChanges();
+            /*
+            var objaveIscemOa = new ObjavaIscemOa[]
+            {
+                new ObjavaIscemOa{Ime="Jure",Priimek="Oblak",Lokacija="Koper",DelovniCas="polni delovni čas / dopoldan",Opis="Potrebujem asistenta z izpitom za avto. Hodim v službo za polovični delovni čas. Potrebujem asistenta, ki me lahko vozi do službe, mi nudi spremstvo in pomoč pri jutranji osebni negi.",AvtorObjave="Jure Oblak",DatumObjave=DateTime.Parse("2023-01-02")},
+                
+            };
+
+            context.ObjaveIscemOa.AddRange(objaveIscemOa);
+            context.SaveChanges();
+
+            */
         }
     }
 }

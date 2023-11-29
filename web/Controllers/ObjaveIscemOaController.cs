@@ -7,26 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace web.Controllers
 {
-    public class UporabniskiRacuniController : Controller
+    public class ObjaveIscemOaController : Controller
     {
         private readonly oaContext _context;
+        private readonly UserManager<ApplicationUser> _usermanager;
 
-        public UporabniskiRacuniController(oaContext context)
+        public ObjaveIscemOaController(oaContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _usermanager = userManager;
         }
 
-        // GET: UporabniskiRacuni
+        // GET: ObjaveIscemOa
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UporabniskiRacuni.ToListAsync());
+            return View(await _context.ObjavaIscemOa.ToListAsync());
         }
 
-        // GET: UporabniskiRacuni/Details/5
+        // GET: ObjaveIscemOa/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +36,44 @@ namespace web.Controllers
                 return NotFound();
             }
 
-            var uporabniskiRacun = await _context.UporabniskiRacuni
+            var objavaIscemOa = await _context.ObjavaIscemOa
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (uporabniskiRacun == null)
+            if (objavaIscemOa == null)
             {
                 return NotFound();
             }
 
-            return View(uporabniskiRacun);
+            return View(objavaIscemOa);
         }
 
-        // GET: UporabniskiRacuni/Create
+        // GET: ObjaveIscemOa/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: UporabniskiRacuni/Create
+        // POST: ObjaveIscemOa/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,uporabniskoIme,eposta,geslo,EnrollmentDate")] UporabniskiRacun uporabniskiRacun)
+        public async Task<IActionResult> Create([Bind("ID,Ime,Priimek,Lokacija,DelovniCas,Opis")] ObjavaIscemOa objavaIscemOa)
         {
+            var currentUser = await _usermanager.GetUserAsync(User);
+            var currUserName = currentUser.UserName;
+            DateTime DT = new DateTime();
             if (ModelState.IsValid)
             {
-                _context.Add(uporabniskiRacun);
+                objavaIscemOa.DatumObjave = DT;
+                objavaIscemOa.AvtorObjave = currUserName;
+                _context.Add(objavaIscemOa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(uporabniskiRacun);
+            return View(objavaIscemOa);
         }
 
-        // GET: UporabniskiRacuni/Edit/5
+        // GET: ObjaveIscemOa/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +81,22 @@ namespace web.Controllers
                 return NotFound();
             }
 
-            var uporabniskiRacun = await _context.UporabniskiRacuni.FindAsync(id);
-            if (uporabniskiRacun == null)
+            var objavaIscemOa = await _context.ObjavaIscemOa.FindAsync(id);
+            if (objavaIscemOa == null)
             {
                 return NotFound();
             }
-            return View(uporabniskiRacun);
+            return View(objavaIscemOa);
         }
 
-        // POST: UporabniskiRacuni/Edit/5
+        // POST: ObjaveIscemOa/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,uporabniskoIme,eposta,geslo,EnrollmentDate")] UporabniskiRacun uporabniskiRacun)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Ime,Priimek,Lokacija,DelovniCas,Opis")] ObjavaIscemOa objavaIscemOa)
         {
-            if (id != uporabniskiRacun.ID)
+            if (id != objavaIscemOa.ID)
             {
                 return NotFound();
             }
@@ -98,12 +105,12 @@ namespace web.Controllers
             {
                 try
                 {
-                    _context.Update(uporabniskiRacun);
+                    _context.Update(objavaIscemOa);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UporabniskiRacunExists(uporabniskiRacun.ID))
+                    if (!ObjavaIscemOaExists(objavaIscemOa.ID))
                     {
                         return NotFound();
                     }
@@ -114,10 +121,10 @@ namespace web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(uporabniskiRacun);
+            return View(objavaIscemOa);
         }
 
-        // GET: UporabniskiRacuni/Delete/5
+        // GET: ObjaveIscemOa/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,34 +132,34 @@ namespace web.Controllers
                 return NotFound();
             }
 
-            var uporabniskiRacun = await _context.UporabniskiRacuni
+            var objavaIscemOa = await _context.ObjavaIscemOa
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (uporabniskiRacun == null)
+            if (objavaIscemOa == null)
             {
                 return NotFound();
             }
 
-            return View(uporabniskiRacun);
+            return View(objavaIscemOa);
         }
 
-        // POST: UporabniskiRacuni/Delete/5
+        // POST: ObjaveIscemOa/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var uporabniskiRacun = await _context.UporabniskiRacuni.FindAsync(id);
-            if (uporabniskiRacun != null)
+            var objavaIscemOa = await _context.ObjavaIscemOa.FindAsync(id);
+            if (objavaIscemOa != null)
             {
-                _context.UporabniskiRacuni.Remove(uporabniskiRacun);
+                _context.ObjavaIscemOa.Remove(objavaIscemOa);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UporabniskiRacunExists(int id)
+        private bool ObjavaIscemOaExists(int id)
         {
-            return _context.UporabniskiRacuni.Any(e => e.ID == id);
+            return _context.ObjavaIscemOa.Any(e => e.ID == id);
         }
     }
 }
